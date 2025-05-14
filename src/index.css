@@ -1,0 +1,44 @@
+@import "tailwindcss";
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* .posterImage{
+    background-image: url("https://i.ebayimg.com/00/s/NDEzWDE2MDA=/z/PPAAAOSwjVpmGOnR/$_57.JPG");
+} */
+
+.menulist{
+    overflow-y: scroll;
+    height: 350px;
+}
+.menulist>:hover{
+    background-color: #3665F3;
+    color: white;
+}
+.slick-next{
+
+margin-right: 25px;
+z-index: 1000;
+width: 30px;
+height: 30px;
+background-color: rgb(223, 219, 219) !important;
+border-radius: 50%;
+}
+.slick-prev{
+    margin-left: 25px;
+    z-index: 1000;
+    width: 30px;
+    height: 30px;
+    background-color: rgb(235, 222, 222) !important;
+    border-radius: 50%; 
+}
