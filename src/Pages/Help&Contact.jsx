@@ -6,6 +6,7 @@ import {
 import { SearchIcon } from "@chakra-ui/icons";
 import { FaShoppingCart, FaBoxOpen, FaUser, FaUndo, FaCheck, FaClipboardList } from "react-icons/fa";
 import StartNavbar from "../components/StartNavbar";
+import MiddleNavbar from "../components/MiddleNavbar";
 import Footer from "../components/Footer";
 
 const helpCategories = [
@@ -20,6 +21,7 @@ const HelpContact = () => {
   return (
     <>
       <StartNavbar />
+      <MiddleNavbar />
 
       <Container maxW="container.xl" py={8}>
         {/* Breadcrumb */}

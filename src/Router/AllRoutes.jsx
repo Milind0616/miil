@@ -8,6 +8,7 @@ import HelpContact from '../Pages/Help&Contact'
 import Sell from '../Pages/Sell'
 import AddToCart from '../Pages/AddToCart'
 import SearchProduct from '../Pages/SearchProduct'
+import Profile from '../Pages/Profile'
 
 export const AllRoutes = () => {
   return (
@@ -21,6 +22,7 @@ export const AllRoutes = () => {
     <Route path='/sell' element={<Sell/>}/>
     <Route path='/addtocart' element={<AddToCart/>}/>
     <Route path='/searchProduct' element={<SearchProduct/>}/>
+    <Route path='/profile' element={<Profile/>}/>
    </Routes>
    </>
   )

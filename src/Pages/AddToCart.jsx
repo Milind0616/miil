@@ -3,6 +3,8 @@ import { Box, Heading, Text, Image, Button, Stack, SimpleGrid } from '@chakra-ui
 import { Card, CardBody, CardFooter } from '@chakra-ui/react';
 import { AuthContext } from '../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import StartNavbar from '../components/StartNavbar';
+import MiddleNavbar from '../components/MiddleNavbar';
 
 const AddToCart = () => {
     const [cartItems, setCartItems] = useState([]);
@@ -28,60 +30,71 @@ const AddToCart = () => {
     };
 
     return (
-        <Box p={5}>
-            <Heading mb={5}>Your Cart</Heading>
-            {cartItems.length === 0 ? (
-                <Text>Your cart is empty.</Text>
-            ) : (
-                <SimpleGrid columns={[1, 2, 3]} spacing={5}>
-                    {cartItems.map((item, index) => (
-                        <Card
-                            key={index}
-                            direction={{ base: 'column', sm: 'row' }}
-                            overflow='hidden'
-                            variant='outline'
-                        >
-                            <Image
-                                objectFit='cover'
-                                maxW={{ base: '100%', sm: '200px' }}
-                                src={item.image}
-                                alt={item.name}
-                            />
-
-                            <Stack>
-                                <CardBody>
-                                    <Heading size='md'>{item.name}</Heading>
-
-                                    <Text py='2'>
-                                        Price: ${item.price}
-                                    </Text>
-                                </CardBody>
-
-                                <CardFooter>
-                                    <Button variant='solid' colorScheme='red' onClick={() => handleRemoveItem(index)}>
-                                        Remove
-                                    </Button>
-                                </CardFooter>
+        <>
+            <StartNavbar />
+            <MiddleNavbar />
+            <Box minH="80vh" px={{ base: 2, md: 10 }} py={8} bgGradient="linear(to-br, white, blue.50)">
+                <Heading mb={8} textAlign="center" color="#3665F3" fontWeight="extrabold" letterSpacing={1.5} fontSize={{ base: '2xl', md: '3xl' }}>Your Shopping Cart</Heading>
+                {cartItems.length === 0 ? (
+                    <Box textAlign="center" py={20}>
+                        <Image src="https://cdn-icons-png.flaticon.com/512/2038/2038854.png" alt="Empty Cart" mx="auto" boxSize="120px" opacity={0.5} mb={4} />
+                        <Text fontSize="xl" color="gray.500">Your cart is empty.</Text>
+                        <Button mt={6} colorScheme="blue" onClick={() => navigate('/')}>Continue Shopping</Button>
+                    </Box>
+                ) : (
+                    <Box>
+                        <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={8}>
+                            {cartItems.map((item, index) => (
+                                <Card
+                                    key={index}
+                                    borderRadius="2xl"
+                                    boxShadow="lg"
+                                    bg="white"
+                                    _hover={{ boxShadow: '2xl', transform: 'scale(1.03)' }}
+                                    transition="all 0.2s"
+                                >
+                                    <Image
+                                        objectFit='cover'
+                                        maxH='180px'
+                                        w="100%"
+                                        src={item.image}
+                                        alt={item.name}
+                                        borderTopRadius="2xl"
+                                    />
+                                    <CardBody>
+                                        <Heading size='md' mb={2} color="#3665F3">{item.name}</Heading>
+                                        <Text color="gray.600" mb={2}>{item.description || 'No description available.'}</Text>
+                                        <Text fontWeight="bold" color="green.600" fontSize="lg">${item.price}</Text>
+                                    </CardBody>
+                                    <CardFooter justifyContent="center">
+                                        <Button variant='outline' colorScheme='red' onClick={() => handleRemoveItem(index)}>
+                                            Remove
+                                        </Button>
+                                    </CardFooter>
+                                </Card>
+                            ))}
+                        </SimpleGrid>
+                        <Box mt={10} maxW="400px" mx="auto" bg="white" p={6} borderRadius="xl" boxShadow="md">
+                            <Heading size="md" mb={4} color="#3665F3">Order Summary</Heading>
+                            <Stack spacing={2}>
+                                <Text>Total Items: <b>{cartItems.length}</b></Text>
+                                <Text>Total Price: <b style={{ color: '#16a34a' }}>${cartItems.reduce((acc, item) => acc + Number(item.price), 0).toFixed(2)}</b></Text>
                             </Stack>
-                        </Card>
-                    ))}
-                </SimpleGrid>
-            )}
-            {cartItems.length > 0 && (
-                <Box textAlign='center' mt={10}>
-                    <Button
-                        size='md'
-                        height='48px'
-                        width='200px'
-                        border='2px'
-                        borderColor='green.500'
-                        colorScheme='green'
-                    >
-                        Checkout
-                    </Button>
-                </Box>
-            )}
-        </Box>
+                            <Button
+                                size='lg'
+                                colorScheme='green'
+                                w="100%"
+                                mt={6}
+                                fontWeight="bold"
+                                fontSize="lg"
+                            >
+                                Checkout
+                            </Button>
+                        </Box>
+                    </Box>
+                )}
+            </Box>
+        </>
     );
 };
 

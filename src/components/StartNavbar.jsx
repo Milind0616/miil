@@ -1,9 +1,8 @@
 import React from 'react';
 import { Flex, Box, Link, Text, Menu, MenuButton, MenuList, MenuItem, IconButton } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import { FaRegBell } from "react-icons/fa";
+import { FaRegBell, FaRegUser } from "react-icons/fa";
 import { BsCart2 } from "react-icons/bs";
-import { IoIosArrowDown } from "react-icons/io";
 
 function StartNavbar() {
     const navigate = useNavigate();
@@ -41,36 +40,9 @@ function StartNavbar() {
                     <Link onClick={clickSell}>Gift&Cards</Link>
                 </Box>
                 <Box display={{ base: 'none', md: 'flex' }} gap={4}>
+                    {/* Removed Watchlist and My eBay menus */}
                     <Menu>
-                        <MenuButton transition='all 0.2s'>
-                            <Box display="flex" alignItems="center" justifyContent="space-between">
-                                Watchlist
-                                <IoIosArrowDown />
-                            </Box>
-                        </MenuButton>
-                        <MenuList>
-                            <MenuItem>Please <Link color={'blue'} href=''>sign in</Link> to view items you are watching.</MenuItem>
-                        </MenuList>
-                    </Menu>
-                    <Menu>
-                        <MenuButton>
-                            <Box display="flex" alignItems="center" justifyContent="space-between">
-                                My eBay
-                                <IoIosArrowDown />
-                            </Box>
-                        </MenuButton>
-                        <MenuList>
-                            <MenuItem>Summary</MenuItem>
-                            <MenuItem>Recently Viewed</MenuItem>
-                            <MenuItem>Bids/Offers</MenuItem>
-                            <MenuItem>Watchlist</MenuItem>
-                            <MenuItem>Purchase History</MenuItem>
-                            <MenuItem>Buy Again</MenuItem>
-                            <MenuItem>Selling</MenuItem>
-                            <MenuItem>Saved Searches</MenuItem>
-                            <MenuItem>Saved Sellers</MenuItem>
-                            <MenuItem>Message</MenuItem>
-                        </MenuList>
+                        <MenuButton as={IconButton} aria-label='Profile' icon={<FaRegUser />} bg={"white"} _hover={{ bg: 'white' }} onClick={() => navigate('/profile')} />
                     </Menu>
                     <Menu>
                         <MenuButton as={IconButton} aria-label='Options' icon={<FaRegBell />} bg={"white"} _hover={{ bg: 'white' }} />

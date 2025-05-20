@@ -116,10 +116,9 @@ function DailyDeals() {
     return (
         <>
             <StartNavbar />
+            <MiddleNavbar />
             <hr />
             <Box background={'#F9F9F9'}>
-                <MiddleNavbar />
-
                 {/*down navbar  */}
                 <Box px={"7em"} display="flex" alignItems="center" justifyContent={"space-between"} >
                     <Heading size={'lg'}> Deals</Heading>
