@@ -49,9 +49,9 @@ function StartNavbar() {
                     <Menu>
                         <MenuButton as={IconButton} aria-label='Profile' icon={<FaRegUser />} bg={"white"} _hover={{ bg: 'white' }} onClick={() => navigate('/profile')} />
                     </Menu>
-                    <Menu>
+                    {/* <Menu>
                         <MenuButton as={IconButton} aria-label='Profile' icon={<FaRegUser />} bg={"white"} _hover={{ bg: 'white' }} onClick={() => navigate('/profile')} />
-                    </Menu>
+                    </Menu> */}
                     <Menu>
                         <MenuButton as={IconButton} aria-label='Options' icon={<FaRegBell />} bg={"white"} _hover={{ bg: 'white' }} />
                     </Menu>
