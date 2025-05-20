@@ -1,7 +1,7 @@
 import React from 'react'
 import StartNavbar from '../components/StartNavbar'
 import MiddleNavbar from '../components/MiddleNavbar'
-import { Link, Box, Flex, Heading, Image, Container, SimpleGrid, Card, Stack, CardBody, Text, Spacer, Button, Divider, ButtonGroup, CardFooter } from '@chakra-ui/react'
+import { Link, Box, Flex, Heading, Image, Container, SimpleGrid, Card, Stack, CardBody, Text, Spacer, Button, Divider, ButtonGroup, CardFooter, useToast } from '@chakra-ui/react'
 import {
     Menu,
     MenuButton,
@@ -11,16 +11,38 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 function DailyDeals() {
+    const toast = useToast();
     const handleAddToCart = (item) => {
         const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-        const isItemInCart = cartItems.some(cartItem => cartItem.name === item.name);
+        const isItemInCart = cartItems.some(cartItem => cartItem.name === item.name && cartItem.userEmail === localStorage.getItem('isAuth'));
 
         if (isItemInCart) {
-            alert(`${item.name} is already in the cart!`);
+            toast({
+                title: `${item.name} is already in the cart!`,
+                status: 'error',
+                duration: 3000,
+                isClosable: true
+            });
         } else {
-            cartItems.push(item);
+            const isAuth = localStorage.getItem('isAuth');
+            if (!isAuth) {
+                toast({
+                    title: 'Please sign in to add items to your cart.',
+                    status: 'warning',
+                    duration: 3000,
+                    isClosable: true
+                });
+                return;
+            }
+            const productWithUser = { ...item, userEmail: isAuth };
+            cartItems.push(productWithUser);
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
-            alert(`${item.name} has been added to the cart!`);
+            toast({
+                title: `${item.name} has been added to the cart!`,
+                status: 'success',
+                duration: 3000,
+                isClosable: true
+            });
         }
     };
 

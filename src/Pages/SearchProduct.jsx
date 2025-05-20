@@ -12,12 +12,19 @@ function SearchProduct() {
 
     const handleAddToCart = (item) => {
         const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-        const isItemInCart = cartItems.some(cartItem => cartItem.name === item.name);
+        const isAuth = localStorage.getItem('isAuth');
+        const isItemInCart = cartItems.some(cartItem => cartItem.name === item.name && cartItem.userEmail === isAuth);
+
+        if (!isAuth) {
+            alert('Please sign in to add items to your cart!');
+            return;
+        }
 
         if (isItemInCart) {
             alert(`${item.name} is already in the cart!`);
         } else {
-            cartItems.push(item);
+            const productWithUser = { ...item, userEmail: isAuth };
+            cartItems.push(productWithUser);
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
             alert(`${item.name} has been added to the cart!`);
         }

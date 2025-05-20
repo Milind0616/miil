@@ -12,21 +12,52 @@ const AddToCart = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        const isAuth = localStorage.getItem('isAuth');
         if (!isAuth) {
             navigate('/signin');
         }
-    }, [isAuth, navigate]);
+    }, [navigate]);
 
     useEffect(() => {
-        // Fetch cart items from localStorage or API
+        // Fetch cart items for the logged-in user only
+        const isAuth = localStorage.getItem('isAuth');
         const storedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-        setCartItems(storedCartItems);
+        // If cart items are stored as [{userEmail, ...product}], filter by user
+        const userCartItems = storedCartItems.filter(item => item.userEmail === isAuth);
+        setCartItems(userCartItems);
     }, []);
 
     const handleRemoveItem = (index) => {
-        const updatedCartItems = cartItems.filter((_, i) => i !== index);
-        setCartItems(updatedCartItems);
+        const isAuth = localStorage.getItem('isAuth');
+        const storedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        // Remove from only the logged-in user's cart
+        const userCartItems = storedCartItems.filter(item => item.userEmail === isAuth);
+        const updatedUserCartItems = userCartItems.filter((_, i) => i !== index);
+        // Merge with other users' cart items
+        const otherUsersCartItems = storedCartItems.filter(item => item.userEmail !== isAuth);
+        const updatedCartItems = [...otherUsersCartItems, ...updatedUserCartItems];
+        setCartItems(updatedUserCartItems);
         localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+    };
+
+    const handleCheckout = () => {
+        const isAuth = localStorage.getItem('isAuth');
+        const bill = {
+            date: new Date().toLocaleString(),
+            items: cartItems,
+            total: cartItems.reduce((acc, item) => acc + Number(item.price), 0).toFixed(2),
+        };
+        // Save bill to localStorage (append if bills exist), associating with user
+        const bills = JSON.parse(localStorage.getItem('bills')) || [];
+        bills.push({ userEmail: isAuth, bill });
+        localStorage.setItem('bills', JSON.stringify(bills));
+        // Remove only this user's cart items
+        const storedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        const updatedCartItems = storedCartItems.filter(item => item.userEmail !== isAuth);
+        setCartItems([]);
+        localStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+        // Redirect to profile
+        navigate('/profile');
     };
 
     return (
@@ -87,6 +118,7 @@ const AddToCart = () => {
                                 mt={6}
                                 fontWeight="bold"
                                 fontSize="lg"
+                                onClick={handleCheckout}
                             >
                                 Checkout
                             </Button>

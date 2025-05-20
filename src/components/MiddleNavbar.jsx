@@ -4,10 +4,14 @@ import {
 } from '@chakra-ui/react';
 import { IoSearchOutline } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
+import { LuSearch } from "react-icons/lu";
+import { IconButton } from "@chakra-ui/react"
 
 function MiddleNavbar() {
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredProducts, setFilteredProducts] = useState([]);
+    const [isOpen, setIsOpen] = useState(false);
+    const toggleMenu = () => setIsOpen(!isOpen);
     const navigate = useNavigate();
     const products = [
         {
@@ -118,16 +122,53 @@ function MiddleNavbar() {
     return (
         <Box w={{ base: "100%", md: "95%" }} px={{ base: 2, md: 10 }} pt={1}>
             <Flex px={10} py={1} alignItems="center" justifyContent="space-between">
-
                 {/* Ebay Logo */}
                 <Image
                     maxW={{ base: "80px", md: "120px" }}
                     src="http://www.w3.org/2000/svg"
                     alt="Ebay Logo"
                 />
-
-                {/* Search with all categories */}
-                <Box position="relative" w={{ base: "100%", md: '50%' }} display="flex" alignItems="center" borderRadius="full" boxShadow="lg" bg="gray.100" p={2}>
+                {/* Burger Icon for Mobile (now a search icon) */}
+                <Box display={{ base: 'flex', md: 'none' }}>
+                    <IconButton
+                        aria-label="Search database"
+                        icon={<LuSearch />}
+                        variant="ghost"
+                        boxSize={7}
+                        onClick={toggleMenu}
+                        cursor="pointer"
+                    />
+                </Box>
+                {/* Search and Button for Desktop */}
+                <Box display={{ base: 'none', md: 'flex' }} alignItems="center" flex={1} mx={4}>
+                    <Box position="relative" w="100%" display="flex" alignItems="center" borderRadius="full" boxShadow="lg" bg="gray.100" p={2}>
+                        <IoSearchOutline style={{ position: "absolute", left: "20px", color: "gray" }} size={24} />
+                        <Input 
+                            placeholder="Search for anything" 
+                            border="none" 
+                            pl="50px" 
+                            _focus={{ outline: "none" }} 
+                            bg="transparent"
+                            value={searchQuery} 
+                            onChange={(e) => setSearchQuery(e.target.value)} 
+                        />
+                    </Box>
+                    <Button 
+                        backgroundColor='#3665F3' 
+                        color="white" 
+                        _hover={{ bg: '#3665F3' }} 
+                        size="lg" 
+                        m={3} 
+                        px={10} 
+                        onClick={handleSearch}
+                    >
+                        Search
+                    </Button>
+                </Box>
+            </Flex>
+            {/* Mobile Menu */}
+            <Box display={{ base: isOpen ? 'block' : 'none', md: 'none' }} px={2} mt={2}>
+                <Box position="relative" w="100%" display="flex" alignItems="center" borderRadius="full" boxShadow="lg" bg="gray.100" p={2} mb={2}>
                     <IoSearchOutline style={{ position: "absolute", left: "20px", color: "gray" }} size={24} />
                     <Input 
                         placeholder="Search for anything" 
@@ -139,22 +180,18 @@ function MiddleNavbar() {
                         onChange={(e) => setSearchQuery(e.target.value)} 
                     />
                 </Box>
-
-                {/* Search button */}
                 <Button 
                     backgroundColor='#3665F3' 
                     color="white" 
                     _hover={{ bg: '#3665F3' }} 
-                    size="lg" 
-                    m={3} 
-                    px={{ base: 3, md: 10 }} 
+                    size="md" 
+                    w="100%"
+                    mb={2}
                     onClick={handleSearch}
                 >
                     Search
                 </Button>
-
-            </Flex>
-
+            </Box>
             {/* Display search results */}
             {filteredProducts.length > 0 && (
                 <Box mt={4}>

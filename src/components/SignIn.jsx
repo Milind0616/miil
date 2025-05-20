@@ -30,10 +30,12 @@ function SignIn() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const { email, password } = form;
-        const storedData = JSON.parse(localStorage.getItem("userData")) || {};
-
-        if (storedData.email === email && storedData.password === password) {
-            localStorage.setItem("isAuth", "Authenticated");
+        // Get users array from localStorage
+        const users = JSON.parse(localStorage.getItem("userData")) || [];
+        // Find user with matching email and password
+        const user = users.find((u) => u.email === email && u.password === password);
+        if (user) {
+            localStorage.setItem("isAuth", email); // Store email as isAuth
             setIsAuth(true);
             navigate('/');
             toast({
@@ -50,7 +52,6 @@ function SignIn() {
                 isClosable: true,
             });
         }
-
         setForm({ email: "", password: "" });
     };
 
