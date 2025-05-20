@@ -9,15 +9,27 @@ import {
   OrderedList,
   UnorderedList,
 } from '@chakra-ui/react'
+import Giftcard from './Giftcard'
+import { useEffect, useContext } from 'react';
+import { AuthContext } from '../Context/AuthContext';
 
 function Sell() {
+  const navigate = useNavigate();
+  const { isAuth } = useContext(AuthContext);
+
+  useEffect(() => {
+    const auth = localStorage.getItem('isAuth');
+    if (!auth) {
+      navigate('/signin');
+    }
+  }, [navigate]);
+
   return (
     <div>
       <StartNavbar />
       <MiddleNavbar />
-
+      <Giftcard />
     </div>
-
   )
 }
 

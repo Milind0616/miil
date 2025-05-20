@@ -51,36 +51,40 @@ function Register() {
     const { email, password } = form;
 
     if (email.trim() && password.trim()) {
-      localStorage.setItem("userData", JSON.stringify(form));
+      // Get existing users array or initialize empty array
+      const existingUsers = JSON.parse(localStorage.getItem("userData")) || [];
+      // Check if email already exists
+      const emailExists = existingUsers.some(user => user.email === email);
+      if (emailExists) {
+        toast({
+          title: "Email already registered. Please use a different email.",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+        return;
+      }
+      // Add new user to array
+      const updatedUsers = [...existingUsers, form];
+      localStorage.setItem("userData", JSON.stringify(updatedUsers));
       setForm({ firstName: "", lastName: "", email: "", password: "" });
-
-
       toast({
         title: "Account created successfully, now ready to login",
         status: "success",
         duration: 3000,
         isClosable: true,
-      
       });
-
       setIsAuth(true);
-
       navigate('/signin')
-
-    }
-
-  else {
+    } else {
       toast({
         title: "Please Enter Valid Credentails",
         status: "error",
         duration: 3000,
         isClosable: true,
-        
       });
     }
-
-    console.log('userData',form);
-
+    console.log('userData', form);
   }
   return (
     <div>

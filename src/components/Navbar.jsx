@@ -76,89 +76,6 @@ export const DownNavbar = () => {
                     mb={{ base: 4, md: 0 }}   // Add margin bottom on small screens to separate from other elements
                 />
 
-                {/* Shop by category Drop Down */}
-                <Menu>
-                    <MenuButton>
-                        <Box display="flex" alignItems="center" justifyContent="space-between">
-                            Shop by category
-                            <IoIosArrowDown />
-                        </Box>
-                    </MenuButton>
-                    <MenuList>
-                    <Box display={{ base: 'block', md: 'flex' }}>
-                            <Box>
-                                <Box>
-                                    <MenuItem as="b">Most popular categories</MenuItem>
-                                    <hr />
-                                    <MenuItem>Smartphones and accessories</MenuItem>
-                                    <MenuItem>Video games and consoles</MenuItem>
-                                    <MenuItem>Computers and tablets</MenuItem>
-                                </Box>
-                                <Box>
-                                    <MenuItem as="b">Most popular categories</MenuItem>
-                                    <hr />
-                                    <MenuItem>Smartphones and accessories</MenuItem>
-                                    <MenuItem>Video games and consoles</MenuItem>
-                                    <MenuItem>Computers and tablets</MenuItem>
-                                </Box>
-                                <Box>
-                                    <MenuItem as="b">Most popular categories</MenuItem>
-                                    <hr />
-                                    <MenuItem>Smartphones and accessories</MenuItem>
-                                    <MenuItem>Video games and consoles</MenuItem>
-                                    <MenuItem>Computers and tablets</MenuItem>
-                                </Box>
-                            </Box>
-                            <Box>
-                                <Box>
-                                    <MenuItem as="b">Most popular categories</MenuItem>
-                                    <hr />
-                                    <MenuItem>Smartphones and accessories</MenuItem>
-                                    <MenuItem>Video games and consoles</MenuItem>
-                                    <MenuItem>Computers and tablets</MenuItem>
-                                </Box>
-                                <Box>
-                                    <MenuItem as="b">Most popular categories</MenuItem>
-                                    <hr />
-                                    <MenuItem>Smartphones and accessories</MenuItem>
-                                    <MenuItem>Video games and consoles</MenuItem>
-                                    <MenuItem>Computers and tablets</MenuItem>
-                                </Box>
-                                <Box>
-                                    <MenuItem as="b">Most popular categories</MenuItem>
-                                    <hr />
-                                    <MenuItem>Smartphones and accessories</MenuItem>
-                                    <MenuItem>Video games and consoles</MenuItem>
-                                    <MenuItem>Computers and tablets</MenuItem>
-                                </Box>
-                            </Box>
-                            <Box>
-                                <Box>
-                                    <MenuItem as="b">More categories</MenuItem>
-                                    <hr />
-                                    <MenuItem>Apple</MenuItem>
-                                    <MenuItem>Samsung</MenuItem>
-                                    <MenuItem>Portable audio and headphones</MenuItem>
-                                </Box>
-                                <Box>
-                                    <MenuItem as="b">More categories</MenuItem>
-                                    <hr />
-                                    <MenuItem>Apple</MenuItem>
-                                    <MenuItem>Samsung</MenuItem>
-                                    <MenuItem>Portable audio and headphones</MenuItem>
-                                </Box>
-                                <Box>
-                                    <MenuItem as="b">More categories</MenuItem>
-                                    <hr />
-                                    <MenuItem>Apple</MenuItem>
-                                    <MenuItem>Samsung</MenuItem>
-                                    <MenuItem>Portable audio and headphones</MenuItem>
-                                </Box>
-                            </Box>
-                        </Box>
-                    </MenuList>
-                </Menu>
-
                 {/* Search with all categories */}
                 <Box w="100%" display="flex" alignItems="center" position="relative">
                     <IoSearchOutline style={{ position: "absolute", left: '15px' }} />
@@ -200,11 +117,6 @@ export const DownNavbar = () => {
                     >
                         Search
                     </Button>
-                </Box>
-
-                {/* Advance page */}
-                <Box display={{ base: 'none', md: 'block' }} p={3}>
-                    <Link>Advance</Link>
                 </Box>
             </Flex>
         </div>
