@@ -1,7 +1,7 @@
 import React from 'react';
 import { Flex, Box, Link, Text, Menu, MenuButton, MenuList, MenuItem, IconButton } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import { FaRegBell } from "react-icons/fa";
+import { FaRegBell, FaRegUser } from "react-icons/fa";
 import { BsCart2 } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
 
@@ -71,6 +71,9 @@ function StartNavbar() {
                             <MenuItem>Saved Sellers</MenuItem>
                             <MenuItem>Message</MenuItem>
                         </MenuList>
+                    </Menu>
+                    <Menu>
+                        <MenuButton as={IconButton} aria-label='Profile' icon={<FaRegUser />} bg={"white"} _hover={{ bg: 'white' }} onClick={() => navigate('/profile')} />
                     </Menu>
                     <Menu>
                         <MenuButton as={IconButton} aria-label='Options' icon={<FaRegBell />} bg={"white"} _hover={{ bg: 'white' }} />
