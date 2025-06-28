@@ -256,7 +256,7 @@ function MiddleNavbar() {
                     <Input
                         placeholder='     Search for anything' border="1px solid" />
                     <Menu>
-                      <MenuButton position="absolute" right="0" borderLeft="1px solid" h="100%" w="9em" px={3}>
+                        <MenuButton position="absolute" right="0" borderLeft="1px solid" h="100%" w="9em" px={3}>
                             <Box display="flex" alignItems="center" justifyContent="space-between">
                                 All Category
                                 <IoIosArrowDown />
